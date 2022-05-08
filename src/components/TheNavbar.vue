@@ -18,7 +18,7 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <a @click.prevent="logout" href="#">
           Выход
         </a>
       </li>
@@ -27,8 +27,22 @@
 </template>
 
 <script>
+import {useRouter} from "vue-router";
+import {useStore} from "vuex";
+
 export default {
-  name: "TheNavbar"
+  name: "TheNavbar",
+  setup() {
+    const router = useRouter();
+    const store = useStore();
+
+    return {
+      logout: () => {
+        store.commit('auth/l ogout')
+        router.push('/auth')
+      }
+    }
+  }
 }
 </script>
 
